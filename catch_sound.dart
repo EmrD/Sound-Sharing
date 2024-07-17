@@ -47,7 +47,6 @@ class _AudioStreamScreenState extends State<AudioStreamScreen> {
       Uint8List audioData = Uint8List.fromList(message);
       _playAudioFromStream(audioData);
 
-      _showSnackbar('Audio data received from server');
     }, onDone: () {
       setState(() {
         _isConnected = false;
@@ -66,7 +65,6 @@ class _AudioStreamScreenState extends State<AudioStreamScreen> {
 
   Future<void> _playAudioFromStream(Uint8List audioData) async {
     try {
-      _showSnackbar('data: $audioData');
 
       await _audioPlayer.startPlayer(
         fromDataBuffer: audioData,
@@ -78,23 +76,6 @@ class _AudioStreamScreenState extends State<AudioStreamScreen> {
       _showSnackbar('Error playing audio: $e');
     }
   }
-
-  //Future<void> _playAudioFromStream(Uint8List audioData) async {
-  //try {
-  //final audioSource = AudioSource.uri(Uri.dataFromString(
-  //base64.encode(audioData), // Ses verisi base64 kodlanarak dönüştürülüyor
-  //mimeType: 'audio/pcm', // Ses verisinin MIME türü
-  //encoding: Encoding.getByName('utf-8')!, // Kodlama türü
-  //));
-
-  //await _audioPlayer.setAudioSource(audioSource);
-  //await _audioPlayer.play();
-  //_showSnackbar('Audio streaming started');
-  //} catch (e) {
-  //print('Error playing audio: $e');
-  //_showAlertDialog('Playback Error', e.toString());
-  //}
-  //}
 
   void _showSnackbar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
