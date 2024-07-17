@@ -20,6 +20,6 @@ async def audio_stream(websocket, path):
 async def start_server():
     async with websockets.serve(audio_stream, host_ip, port):
         print(f"Server listening at ws://{host_ip}:{port}")
-        await asyncio.Future()  # asenkron döngüde kalma
+        await asyncio.Future()
 
 asyncio.run(start_server())
